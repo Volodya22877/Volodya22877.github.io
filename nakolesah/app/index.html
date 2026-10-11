@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+  <title>На колёсах — запись</title>
+  <meta name="theme-color" content="#0d0f12">
+  <link rel="icon" href="../img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="app.css">
+  <!-- официальный скрипт Mini App; вне Telegram (превью) приложение работает и без него -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <div class="app" id="app">
+    <header class="bar">
+      <div class="brand">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="12.5" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="3.6 2"/><circle cx="16" cy="16" r="5" fill="var(--accent)"/></svg>
+        <div><b>На колёсах</b><small id="stepName">Запись в автосервис</small></div>
+      </div>
+      <ol class="progress" id="progress" aria-hidden="true"><li></li><li></li><li></li><li></li><li></li></ol>
+    </header>
+
+    <div class="notice" id="notice" hidden></div>
+
+    <main id="screen"></main>
+
+    <!-- вне Telegram: свои кнопки вместо MainButton/BackButton -->
+    <nav class="preview-bar" id="previewBar" hidden>
+      <button type="button" class="pv-back" id="pvBack">Назад</button>
+      <button type="button" class="pv-next" id="pvNext">Далее</button>
+    </nav>
+  </div>
+
+  <div class="modal" id="modal" hidden>
+    <div class="modal-box">
+      <h2>Готово — заявка ушла бы боту</h2>
+      <p>В Telegram приложение закроется, а бот пришлёт номер заявки и напомнит о визите. Вот что отправляется:</p>
+      <pre id="payload"></pre>
+      <button type="button" class="pv-next" id="modalClose">Понятно</button>
+    </div>
+  </div>
+</body>
+</html>
