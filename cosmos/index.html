@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>PROJEKT COSMOS — Солнечная система в браузере</title>
+  <meta name="description" content="Интерактивная 3D-модель Солнечной системы: процедурные планеты, пролёты камеры, реальные характеристики на русском и английском.">
+  <meta name="theme-color" content="#03040a">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='none' stroke='%23eef1f8' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='7' fill='%23ffb347'/%3E%3Ccircle cx='16' cy='2' r='3' fill='%239fd0ff'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/style.css">
+  <script type="importmap">{ "imports": { "three": "./vendor/three.module.js" } }</script>
+  <!-- модули качаются параллельно, а не цепочкой «main → импорты → их импорты» -->
+  <link rel="modulepreload" href="vendor/three.module.js">
+  <link rel="modulepreload" href="js/shaders.js">
+  <link rel="modulepreload" href="js/bodies.js">
+  <link rel="modulepreload" href="js/planets.js">
+  <link rel="modulepreload" href="js/camera.js">
+  <link rel="modulepreload" href="js/ui.js">
+  <link rel="modulepreload" href="js/i18n.js">
+  <script type="module" src="js/main.js"></script>
+</head>
+<body>
+  <canvas id="scene" aria-label="3D-сцена Солнечной системы"></canvas>
+  <div class="vignette" aria-hidden="true"></div>
+  <div class="labels" id="labels" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <a class="logo" id="logo" href="#"><span class="logo-mark" aria-hidden="true"></span>PROJEKT COSMOS</a>
+    <div class="controls">
+      <div class="seg" role="group" data-i18n-aria="time">
+        <span class="seg-label" data-i18n="time">Время</span>
+        <button type="button" data-speed="0" data-i18n-title="pause" data-i18n-aria="pause"><svg viewBox="0 0 10 10" aria-hidden="true"><rect x="1.5" y="1" width="2.4" height="8" rx=".6"/><rect x="6.1" y="1" width="2.4" height="8" rx=".6"/></svg></button>
+        <button type="button" data-speed="1" class="on">1×</button>
+        <button type="button" data-speed="10">10×</button>
+        <button type="button" data-speed="100">100×</button>
+      </div>
+      <button type="button" class="pill lang" id="lang" data-i18n-aria="langLabel">EN</button>
+    </div>
+  </header>
+
+  <nav class="nav" id="nav" data-i18n-aria="navLabel"></nav>
+
+  <aside class="panel" id="panel" aria-hidden="true">
+    <button type="button" class="sheet-handle" id="sheetToggle" aria-expanded="true"><span aria-hidden="true"></span></button>
+    <div class="panel-top">
+      <button type="button" class="pill back" id="toMap">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3 5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span data-i18n="toMap">Карта</span>
+      </button>
+      <div class="pnav">
+        <button type="button" class="arrow" id="prev"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3 5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <span class="count" id="pCount"></span>
+        <button type="button" class="arrow" id="next"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m6 3 5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </div>
+    </div>
+    <p class="kicker reveal" id="pType"></p>
+    <h2 class="title" id="pName"></h2>
+    <p class="desc reveal" id="pDesc" style="--d: 200ms"></p>
+    <dl class="stats" id="pStats"></dl>
+    <div class="fact reveal" style="--d: 700ms">
+      <b data-i18n="fact">Факт</b>
+      <p id="pFact"></p>
+    </div>
+    <p class="note reveal" id="pNote" style="--d: 800ms"></p>
+  </aside>
+
+  <p class="hint" id="hint"></p>
+  <p class="foot"><span data-i18n="scaleNote"></span> · <span data-i18n="credit"></span></p>
+
+  <!-- Обложка-лендинг: сверху заголовок, окно во всю ширину (в нём живая сцена), ниже — о проекте и переход к модели -->
+  <section class="intro" id="intro">
+    <div class="intro-sheet" aria-hidden="true"></div>
+    <header class="hero">
+      <p class="demo-badge" data-i18n="demoBadge">Демонстрационный проект</p>
+      <p class="intro-kicker" data-i18n="kicker">Интерактивная модель</p>
+      <h1 class="intro-title" aria-label="PROJEKT COSMOS">
+        <span style="--i:0">P</span><span style="--i:1">R</span><span style="--i:2">O</span><span style="--i:3">J</span><span style="--i:4">E</span><span style="--i:5">K</span><span style="--i:6">T</span><span class="gap"></span><span style="--i:7">C</span><span style="--i:8">O</span><span style="--i:9">S</span><span style="--i:10">M</span><span style="--i:11">O</span><span style="--i:12">S</span>
+      </h1>
+      <p class="intro-tag" data-i18n="tagline"></p>
+    </header>
+    <div class="porthole" id="porthole" aria-hidden="true"></div>
+    <div class="landing">
+      <p class="scroll-hint" data-i18n="scrollHint"></p>
+      <section class="about">
+        <h2 data-i18n="aboutTitle"></h2>
+        <p class="about-text" data-i18n="aboutText"></p>
+        <ul class="cards">
+          <li><b data-i18n="card1t"></b><span data-i18n="card1"></span></li>
+          <li><b data-i18n="card2t"></b><span data-i18n="card2"></span></li>
+          <li><b data-i18n="card3t"></b><span data-i18n="card3"></span></li>
+          <li><b data-i18n="card4t"></b><span data-i18n="card4"></span></li>
+        </ul>
+      </section>
+      <!-- в цифрах: значения правдивые, автотест сверяет их со сценой и размером файлов -->
+      <section class="numbers">
+        <h2 data-i18n="numTitle"></h2>
+        <ul class="num-grid">
+          <li><b class="num" data-num="planets" data-to="8">8</b><span data-i18n="num1"></span></li>
+          <li><b class="num" data-num="decor" data-to="15">15</b><span data-i18n="num2"></span></li>
+          <li><b class="num" data-num="artifacts" data-to="22">22</b><span data-i18n="num3"></span></li>
+          <li><b class="num" data-num="images" data-to="0">0</b><span data-i18n="num4"></span></li>
+          <li><b class="num" data-num="codeKB" data-to="250" data-prefix="&lt;&#8202;">&lt;&#8202;250</b><span data-i18n="num5"></span></li>
+          <li><b class="num" data-num="yearMin" data-to="3">3</b><span data-i18n="num6"></span></li>
+        </ul>
+      </section>
+      <section class="look">
+        <h2 data-i18n="lookTitle"></h2>
+        <ul class="look-list">
+          <li><b data-i18n="look1t"></b><span data-i18n="look1"></span></li>
+          <li><b data-i18n="look2t"></b><span data-i18n="look2"></span></li>
+          <li><b data-i18n="look3t"></b><span data-i18n="look3"></span></li>
+          <li><b data-i18n="look4t"></b><span data-i18n="look4"></span></li>
+          <li><b data-i18n="look5t"></b><span data-i18n="look5"></span></li>
+          <li><b data-i18n="look6t"></b><span data-i18n="look6"></span></li>
+        </ul>
+      </section>
+      <section class="howto">
+        <h2 data-i18n="howTitle"></h2>
+        <div class="how-cols">
+          <div>
+            <h3 data-i18n="howPc"></h3>
+            <ul class="keys">
+              <li><kbd data-i18n="kClick"></kbd><span data-i18n="dClick"></span></li>
+              <li><kbd data-i18n="kDrag"></kbd><span data-i18n="dDrag"></span></li>
+              <li><kbd data-i18n="kWheel"></kbd><span data-i18n="dWheel"></span></li>
+              <li><kbd>← →</kbd><span data-i18n="dArrows"></span></li>
+              <li><kbd>Esc</kbd><span data-i18n="dEsc"></span></li>
+              <li><kbd>1× 10× 100×</kbd><span data-i18n="dSpeed"></span></li>
+            </ul>
+          </div>
+          <div>
+            <h3 data-i18n="howTouch"></h3>
+            <ul class="keys">
+              <li><kbd data-i18n="kTap"></kbd><span data-i18n="dTap"></span></li>
+              <li><kbd data-i18n="kSwipe"></kbd><span data-i18n="dSwipe"></span></li>
+              <li><kbd data-i18n="kPinch"></kbd><span data-i18n="dPinch"></span></li>
+              <li><kbd data-i18n="kSheet"></kbd><span data-i18n="dSheet"></span></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      <section class="tech">
+        <h2 data-i18n="techTitle"></h2>
+        <ul class="tech-list">
+          <li data-i18n="tech1"></li>
+          <li data-i18n="tech2"></li>
+          <li data-i18n="tech3"></li>
+          <li data-i18n="tech4"></li>
+          <li data-i18n="tech5"></li>
+        </ul>
+      </section>
+      <section class="offer">
+        <h2 data-i18n="offerTitle"></h2>
+        <p class="offer-text" data-i18n="offerText"></p>
+        <ul class="cards">
+          <li><b data-i18n="offer1t"></b><span data-i18n="offer1"></span></li>
+          <li><b data-i18n="offer2t"></b><span data-i18n="offer2"></span></li>
+          <li><b data-i18n="offer3t"></b><span data-i18n="offer3"></span></li>
+        </ul>
+      </section>
+      <section class="cta">
+        <h2 data-i18n="ctaTitle"></h2>
+        <p data-i18n="ctaText"></p>
+        <button type="button" class="launch" id="launch" disabled><span id="launchText">Собираем Вселенную…</span></button>
+      </section>
+      <p class="intro-sign" data-i18n="demoSign"></p>
+    </div>
+  </section>
+
+  <div class="nogl" id="nogl" hidden></div>
+  <noscript><div class="nogl">Для полёта нужен JavaScript.</div></noscript>
+</body>
+</html>
