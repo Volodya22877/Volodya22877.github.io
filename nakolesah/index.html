@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>На колёсах — автосервис: ТО, шиномонтаж, ремонт. Запись в Telegram</title>
+  <meta name="description" content="Автосервис «На колёсах»: ТО, шиномонтаж, диагностика и ремонт. Запись за минуту в Telegram, напоминания за день и за 2 часа. Демо-проект.">
+  <meta name="theme-color" content="#0d0f12">
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="fonts/unbounded-cyrillic-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/manrope-cyrillic-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/site.css">
+  <script type="module" src="js/site.js"></script>
+</head>
+<body>
+  <a class="skip" href="#services">К услугам</a>
+
+  <div class="ribbon" id="season" hidden>
+    <span class="ribbon-text"></span>
+    <a class="ribbon-link" data-start="svc_tr16" href="#">Записаться на переобувку →</a>
+  </div>
+
+  <header class="top" id="top">
+    <div class="wrap top-row">
+      <a class="logo" href="#top" aria-label="На колёсах — наверх">
+        <svg class="logo-mark" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="13" fill="none" stroke="currentColor" stroke-width="3.2" stroke-dasharray="4 2.2"/><circle cx="16" cy="16" r="5.5" fill="var(--accent)"/></svg>
+        <span>На колёсах</span>
+      </a>
+      <nav class="nav" id="nav" aria-label="Разделы">
+        <a href="#services">Услуги и цены</a>
+        <a href="#calc">Калькулятор</a>
+        <a href="#how">Как записаться</a>
+        <a href="#reviews">Отзывы</a>
+        <a href="#contacts">Контакты</a>
+      </nav>
+      <span class="status" id="status" aria-live="polite"><i></i><b>Открыто</b><span></span></span>
+      <a class="btn btn-sm btn-accent top-cta" data-start="book" href="#">Записаться</a>
+      <button class="burger" id="burger" type="button" aria-label="Меню" aria-expanded="false" aria-controls="nav"><span></span></button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Первый экран -->
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Автосервис · ТО · шиномонтаж · ремонт</p>
+          <h1>Ремонт и&nbsp;ТО<br><em>без звонков</em><br>и&nbsp;очередей</h1>
+          <p class="lead">Запишитесь за минуту в Telegram: свободное время видно сразу, а&nbsp;мы напомним о&nbsp;визите за день и&nbsp;за&nbsp;2&nbsp;часа.</p>
+          <div class="hero-actions">
+            <a class="btn btn-accent btn-lg" data-start="book" href="#">
+              <svg class="tg" viewBox="0 0 24 24" aria-hidden="true"><path d="M21.4 4.3 2.9 11.4c-1.3.5-1.2 1.2-.2 1.5l4.7 1.5 1.8 5.6c.2.6.4.8.9.8.4 0 .6-.2.9-.5l2.3-2.2 4.7 3.5c.9.5 1.5.2 1.7-.8l3.1-14.6c.3-1.3-.5-1.9-1.4-1.5Zm-3 3.4-8.8 7.9-.3 3.6-1.6-5 10.2-6.5c.5-.3.9-.1.5 0Z" fill="currentColor"/></svg>
+              Записаться в&nbsp;Telegram
+            </a>
+            <a class="btn btn-ghost btn-lg" href="#services">Услуги и цены</a>
+          </div>
+          <ul class="facts">
+            <li><b>3</b><span>поста —<br>без очереди</span></li>
+            <li><b>9–21</b><span>ежедневно,<br>без перерыва</span></li>
+            <li><b>6 мес.</b><span>гарантия<br>на работы</span></li>
+          </ul>
+        </div>
+
+        <div class="hero-art" aria-hidden="true">
+          <div class="glow"></div>
+          <svg class="wheel" id="wheel" viewBox="0 0 400 400">
+            <defs>
+              <radialGradient id="rubber" cx="50%" cy="45%" r="55%">
+                <stop offset="0" stop-color="#2a2e35"/><stop offset=".78" stop-color="#16181c"/><stop offset="1" stop-color="#0b0c0e"/>
+              </radialGradient>
+              <linearGradient id="metal" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#f2f4f7"/><stop offset=".45" stop-color="#a9b0ba"/><stop offset=".55" stop-color="#7d8590"/><stop offset="1" stop-color="#d7dbe1"/>
+              </linearGradient>
+              <radialGradient id="disc" cx="50%" cy="50%" r="50%">
+                <stop offset="0" stop-color="#6b7179"/><stop offset=".85" stop-color="#3b3f45"/><stop offset="1" stop-color="#25282d"/>
+              </radialGradient>
+              <path id="sidewall" d="M200 200 m-152 0 a152 152 0 1 1 304 0 a152 152 0 1 1 -304 0"/>
+            </defs>
+            <!-- слои как у настоящего колеса: шина и тормозной диск → неподвижный суппорт → спицы диска -->
+            <g class="spin">
+              <circle cx="200" cy="200" r="194" fill="url(#rubber)"/>
+              <g id="tread"></g>
+              <circle cx="200" cy="200" r="168" fill="none" stroke="#000" stroke-opacity=".35" stroke-width="2"/>
+              <text class="sidewall" font-size="13"><textPath href="#sidewall">НА КОЛЁСАХ · 205/55 R16 · ТО · ШИНОМОНТАЖ · РЕМОНТ · НА КОЛЁСАХ · 205/55 R16 ·</textPath></text>
+              <circle cx="200" cy="200" r="132" fill="#0b0c0e"/>
+              <circle cx="200" cy="200" r="104" fill="url(#disc)"/>
+              <g id="holes" fill="#1a1c20"></g>
+            </g>
+            <path class="caliper" d="M262 108a112 112 0 0 1 42 52l-26 10a84 84 0 0 0-31-39Z"/>
+            <g class="spin">
+              <circle cx="200" cy="200" r="128" fill="none" stroke="url(#metal)" stroke-width="9"/>
+              <g id="spokes" fill="url(#metal)"></g>
+              <circle cx="200" cy="200" r="30" fill="url(#metal)"/>
+              <g id="bolts" fill="#3a3f46"></g>
+              <circle cx="200" cy="200" r="9" fill="#0d0f12"/>
+            </g>
+          </svg>
+          <div class="chip chip-1"><svg class="ic-tire" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="3.5"/><path d="M12 3.5v5M12 15.5v5M3.5 12h5M15.5 12h5"/></svg>Переобувка от&nbsp;2&nbsp;400&nbsp;₽</div>
+          <div class="chip chip-2"><span>⏰</span>Напомним за&nbsp;2&nbsp;часа</div>
+          <div class="chip chip-3"><span>✅</span>Запись №1042 подтверждена</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Услуги -->
+    <section class="section" id="services">
+      <div class="wrap">
+        <div class="head reveal">
+          <p class="eyebrow">Прайс</p>
+          <h2>Услуги и цены</h2>
+          <p class="sub">Цены «от» — точную стоимость согласуем после осмотра, до начала работ. Запчасти наши (с&nbsp;гарантией) или ваши.</p>
+        </div>
+        <div class="cards" id="svcGrid"></div>
+      </div>
+    </section>
+
+    <!-- Калькулятор -->
+    <section class="section section-alt" id="calc">
+      <div class="wrap calc reveal">
+        <div class="calc-copy">
+          <p class="eyebrow">Сезон переобувки</p>
+          <h2>Сколько стоит переобуться</h2>
+          <p class="sub">Выберите размер колёс и что нужно сделать — покажем ориентировочную цену и сразу запишем.</p>
+        </div>
+        <form class="calc-box" id="calcForm" onsubmit="return false">
+          <fieldset>
+            <legend>Радиус дисков</legend>
+            <div class="seg" id="radius" role="radiogroup"></div>
+          </fieldset>
+          <fieldset>
+            <legend>Дополнительно</legend>
+            <label class="opt"><input type="checkbox" name="bal" checked><span>Балансировка 4 колёс</span><b>+1 200 ₽</b></label>
+            <label class="opt"><input type="checkbox" name="hole"><span>Ремонт прокола</span><b>+600 ₽</b></label>
+            <label class="opt"><input type="checkbox" name="store"><span>Хранение шин до следующего сезона</span><b>+3 000 ₽</b></label>
+          </fieldset>
+          <div class="calc-total">
+            <div>
+              <span class="calc-label">Ориентировочно</span>
+              <output class="calc-sum" id="calcSum" for="radius">≈ 3 600 ₽</output>
+              <span class="calc-detail" id="calcDetail"></span>
+            </div>
+            <a class="btn btn-accent" id="calcBtn" data-start="svc_tr16" href="#">Записаться</a>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- Как записаться -->
+    <section class="section" id="how">
+      <div class="wrap how">
+        <div class="how-copy">
+          <div class="head reveal">
+            <p class="eyebrow">Как записаться</p>
+            <h2>Минута в&nbsp;Telegram — и&nbsp;вы&nbsp;записаны</h2>
+          </div>
+          <ol class="steps">
+            <li class="reveal"><b>Выберите услугу</b><span>Цены видны сразу, «другое» — опишите своими словами.</span></li>
+            <li class="reveal"><b>Укажите машину и время</b><span>Бот показывает только свободные окна по трём постам — двойной записи не будет.</span></li>
+            <li class="reveal"><b>Приезжайте</b><span>Напомним за день и за 2 часа. Передумали — перенесите или отмените в пару нажатий.</span></li>
+          </ol>
+          <a class="btn btn-accent" data-start="book" href="#">Открыть бота</a>
+        </div>
+        <div class="phone reveal" aria-label="Пример диалога с ботом записи">
+          <div class="phone-top"><span class="ava">НК</span><div><b>На колёсах</b><small>бот</small></div></div>
+          <div class="chat" id="chat">
+            <div class="msg out">🔧 Записаться</div>
+            <div class="msg in"><b>Шаг 1 из 5 · Что нужно сделать?</b>
+              <div class="kb"><span>🛢 ТО и масло</span><span class="on"><svg class="ic-tire" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="3.5"/><path d="M12 3.5v5M12 15.5v5M3.5 12h5M15.5 12h5"/></svg> Шиномонтаж</span><span>🔍 Диагностика</span><span>🔧 Ремонт</span></div>
+            </div>
+            <div class="msg in"><b>Шаг 4 из 5 · чт, 15 октября</b>Свободное время:
+              <div class="kb kb-4"><span>10:00</span><span>11:00</span><span>13:00</span><span class="on">16:00</span><span>18:00</span><span>19:00</span><span>20:00</span></div>
+            </div>
+            <div class="msg in ok"><b>✅ Запись №1042 подтверждена!</b>Ждём вас чт, 15 октября, 16:00.<br>📍 ул. Моторная, 12</div>
+            <div class="msg in"><b>⏰ Напоминаем:</b> завтра в 16:00 ждём вас в «На колёсах»
+              <div class="kb"><span class="on">👍 Буду</span><span>🔁 Перенести</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Преимущества -->
+    <section class="section section-alt">
+      <div class="wrap">
+        <div class="head reveal"><p class="eyebrow">Почему к нам</p><h2>Честно, быстро, с&nbsp;гарантией</h2></div>
+        <ul class="perks">
+          <li class="reveal"><b>Гарантия 6 месяцев</b><span>На все работы. На наши запчасти — гарантия производителя.</span></li>
+          <li class="reveal"><b>Цена до начала работ</b><span>Осматриваем, называем сумму, и только после «да» берёмся за ключи.</span></li>
+          <li class="reveal"><b>Ваши запчасти — можно</b><span>Привозите своё: поставим, на работу гарантия остаётся.</span></li>
+          <li class="reveal"><b>Ждать не скучно</b><span>Зона отдыха: кофе, Wi-Fi, телевизор. Замена масла — около 30 минут.</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Отзывы -->
+    <section class="section" id="reviews">
+      <div class="wrap">
+        <div class="head reveal">
+          <p class="eyebrow">Отзывы</p>
+          <h2>Что говорят клиенты</h2>
+          <p class="sub demo-note">Это демо-проект: отзывы ниже — примеры того, как блок будет выглядеть у реального сервиса.</p>
+        </div>
+        <div class="reviews">
+          <figure class="review reveal"><div class="stars" aria-label="5 из 5">★★★★★</div><blockquote>Записался вечером в боте, утром переобули за 40 минут. Напоминание пришло — очень кстати, я бы забыл.</blockquote><figcaption><b>Андрей</b><span>Kia Rio · пример</span></figcaption></figure>
+          <figure class="review reveal"><div class="stars" aria-label="5 из 5">★★★★★</div><blockquote>Перед покупкой проверили машину и нашли следы ремонта, которых продавец «не помнил». Сэкономили мне кучу денег.</blockquote><figcaption><b>Марина</b><span>Toyota Camry · пример</span></figcaption></figure>
+          <figure class="review reveal"><div class="stars" aria-label="4 из 5">★★★★☆</div><blockquote>Колодки поменяли быстро, цену назвали сразу и не накрутили. Минус звезда — кофе закончился 🙂</blockquote><figcaption><b>Игорь</b><span>Lada Vesta · пример</span></figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- Вопросы -->
+    <section class="section section-alt" id="faq">
+      <div class="wrap faq-wrap">
+        <div class="head reveal"><p class="eyebrow">Вопросы</p><h2>Частые вопросы</h2></div>
+        <div class="faq">
+          <details class="reveal"><summary>Сколько ждать?</summary><p>Замена масла — около 30 минут, переобувка — до часа. Можно подождать в зоне отдыха с кофе.</p></details>
+          <details class="reveal"><summary>Можно со своими запчастями?</summary><p>Да. На работу гарантия остаётся, на запчасти клиента — нет.</p></details>
+          <details class="reveal"><summary>Какая гарантия?</summary><p>6 месяцев на все работы, на наши запчасти — гарантия производителя.</p></details>
+          <details class="reveal"><summary>Как оплатить?</summary><p>Наличные, карта или перевод по СБП. Выдаём заказ-наряд и чек.</p></details>
+          <details class="reveal"><summary>Храните шины?</summary><p>Да: сезонное хранение — 3 000 ₽ за комплект, с мойкой и упаковкой.</p></details>
+          <details class="reveal"><summary>Можно приехать без записи?</summary><p>Можно, если есть свободный пост. Но с записью — без ожидания: время держим за вами.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <!-- Контакты -->
+    <section class="section" id="contacts">
+      <div class="wrap contacts">
+        <div class="contacts-copy reveal">
+          <p class="eyebrow">Контакты</p>
+          <h2>Как нас найти</h2>
+          <dl class="info">
+            <dt>Адрес</dt><dd>ул. Моторная, 12 <small>(демо-адрес)</small><br>Въезд со двора — жёлтые ворота с вывеской «На колёсах».</dd>
+            <dt>Часы</dt><dd>Ежедневно 9:00–21:00, без перерыва<br><span class="status status-inline" data-status><i></i><b>Открыто</b><span></span></span></dd>
+            <dt>Связь</dt><dd>Звонить не нужно — запись, вопросы мастеру и напоминания в Telegram.</dd>
+          </dl>
+          <a class="btn btn-accent" data-start="book" href="#">Написать в Telegram</a>
+        </div>
+        <figure class="map reveal" aria-label="Схема проезда">
+          <svg viewBox="0 0 520 380" role="img">
+            <title>Схема проезда к автосервису «На колёсах»</title>
+            <rect width="520" height="380" fill="#121519"/>
+            <path d="M0 300 C120 270 200 330 320 300 S470 250 520 270 V380 H0Z" fill="#14202a"/>
+            <text x="420" y="350" class="map-label map-water">р. Тихая</text>
+            <rect x="330" y="40" width="150" height="110" rx="14" fill="#152018"/>
+            <text x="405" y="100" class="map-label map-park" text-anchor="middle">сквер</text>
+            <g stroke="#262b33" stroke-width="20" stroke-linecap="round" fill="none">
+              <path d="M-10 190 H530"/><path d="M150 -10 V400"/><path d="M300 190 V400"/><path d="M-10 70 H300"/>
+            </g>
+            <g stroke="#2f3540" stroke-width="2" stroke-dasharray="10 10" fill="none"><path d="M-10 190 H530"/><path d="M150 -10 V400"/></g>
+            <text x="20" y="178" class="map-label">ул. Моторная</text>
+            <text x="162" y="40" class="map-label" transform="rotate(90 162 40)">Заводской пр.</text>
+            <g class="map-route" fill="none" stroke="var(--accent)" stroke-width="4" stroke-linecap="round" stroke-dasharray="2 10"><path d="M40 190 H218 V236"/></g>
+            <rect x="200" y="226" width="76" height="52" rx="8" fill="#20252c" stroke="var(--accent)" stroke-width="2"/>
+            <rect x="214" y="270" width="48" height="8" fill="var(--accent)"/>
+            <text x="238" y="256" class="map-label map-house" text-anchor="middle">№12</text>
+            <circle class="pin-pulse" cx="238" cy="206" r="10" fill="var(--accent)"/>
+            <path d="M238 222c-14-18-20-26-20-34a20 20 0 0 1 40 0c0 8-6 16-20 34Z" fill="var(--accent)"/>
+            <circle cx="238" cy="188" r="7" fill="#0d0f12"/>
+            <text x="270" y="214" class="map-label map-brand">На колёсах · въезд со двора</text>
+          </svg>
+        </figure>
+      </div>
+    </section>
+
+    <!-- Финальный призыв -->
+    <section class="final">
+      <div class="wrap final-box reveal">
+        <h2>Свободное время видно сразу</h2>
+        <p>Запишитесь сейчас — напомним заранее, а перенести или отменить можно в пару нажатий.</p>
+        <a class="btn btn-dark btn-lg" data-start="book" href="#">Записаться в Telegram</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap foot-row">
+      <a class="logo" href="#top"><svg class="logo-mark" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="13" fill="none" stroke="currentColor" stroke-width="3.2" stroke-dasharray="4 2.2"/><circle cx="16" cy="16" r="5.5" fill="var(--accent)"/></svg><span>На колёсах</span></a>
+      <p class="demo">Демо-проект для портфолио: автосервис, адрес и отзывы вымышлены. Сайт и Telegram-бот записи — пример работы.</p>
+      <p class="copy">© <span id="year">2026</span></p>
+    </div>
+  </footer>
+
+  <a class="sticky-cta btn btn-accent" data-start="book" href="#">Записаться в Telegram</a>
+</body>
+</html>
