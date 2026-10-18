@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Запись к Нине Озеровой</title>
+<meta name="description" content="Telegram Mini App записи к психологу Нине Озеровой: формат, день и время, подтверждение. Демо-проект.">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="../img/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="../fonts/onest.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="app.css">
+<!-- скрипт Telegram подключает app.js: внутри Telegram — с telegram.org, а если он недоступен (в РФ бывает) — локальную копию -->
+<script type="module" src="app.js"></script>
+</head>
+<body>
+<svg class="sprite" aria-hidden="true" focusable="false">
+  <symbol id="logo" viewBox="0 0 48 48"><path d="M24 5.5c3.9 5 5.8 8.7 5.8 11.2a5.8 5.8 0 0 1-11.6 0c0-2.5 1.9-6.2 5.8-11.2Z" fill="currentColor"/><ellipse cx="24" cy="33.5" rx="10.5" ry="3.7" fill="none" stroke="currentColor" stroke-width="2"/><ellipse cx="24" cy="34.5" rx="20" ry="7.5" fill="none" stroke="currentColor" stroke-width="1.6" opacity=".5"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 6.6A2.6 2.6 0 0 1 6.6 4h10.8A2.6 2.6 0 0 1 20 6.6v7.8a2.6 2.6 0 0 1-2.6 2.6H10l-4.5 3.4V17h-1A2.6 2.6 0 0 1 4 14.4Z"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3Z"/></symbol>
+  <symbol id="i-cup" viewBox="0 0 24 24"><path d="M4.5 9h11.5v4.8a5 5 0 0 1-5 5h-1.5a5 5 0 0 1-5-5Z"/><path d="M16 10.5h1.6a2.6 2.6 0 0 1 0 5.2H16M8 3.5c0 1.3 1 1.5 1 2.8M11.5 3.5c0 1.3 1 1.5 1 2.8"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.2 4.2L19 7"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 16.5V11a6 6 0 0 1 12 0v5.5l1.5 2h-15Z"/><path d="M10 20.8a2.2 2.2 0 0 0 4 0"/></symbol>
+</svg>
+
+<main class="app" id="app">
+  <header class="app-head">
+    <div class="app-brand">
+      <svg class="app-logo" aria-hidden="true"><use href="#logo"/></svg>
+      <div><b>Нина Озерова</b><small id="stepLabel">Шаг 1 из 4</small></div>
+    </div>
+    <ol class="app-steps" id="stepDots" aria-hidden="true"><li></li><li></li><li></li><li></li></ol>
+  </header>
+  <p class="preview-bar" id="previewBar" hidden>Превью вне Telegram: так запись выглядит внутри бота. Данные никуда не&nbsp;уходят.</p>
+  <section class="screen" id="screen" aria-live="polite"></section>
+  <p class="app-demo">Демо-проект для портфолио: психолог вымышленный.</p>
+  <nav class="app-nav" id="pvNav" aria-label="Шаги записи" hidden>
+    <button class="nav-btn nav-back" id="pvBack" type="button" hidden>Назад</button>
+    <button class="nav-btn nav-next" id="pvNext" type="button" disabled>Далее</button>
+  </nav>
+</main>
+
+<div class="modal" id="modal" hidden>
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <h2 id="modalTitle">Готово — так бы ушло боту</h2>
+    <p>Внутри Telegram эти данные получает бот, проверяет, что время ещё свободно, и&nbsp;создаёт запись.</p>
+    <pre id="payload"></pre>
+    <button class="nav-btn nav-next" id="modalClose" type="button">Понятно</button>
+  </div>
+</div>
+</body>
+</html>
