@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Веб-разработчик: сайты, Telegram-боты и автоматизация под ключ</title>
-  <meta name="description" content="Портфолио: сайты и лендинги, Telegram-боты и Mini Apps, 3D в браузере. Онлайн-запись для автосервиса, интерактивная модель Солнечной системы.">
+  <meta name="description" content="Портфолио: сайты и лендинги, Telegram-боты и Mini Apps, 3D в браузере. Онлайн-запись для автосервиса, сайт психолога, интерактивная модель Солнечной системы.">
   <meta name="theme-color" content="#0d0f12">
   <link rel="icon" href="nakolesah/img/favicon.svg" type="image/svg+xml">
   <style>
@@ -22,13 +22,9 @@
     h1 { margin: 0 0 18px; font: 800 clamp(32px, 5.2vw, 60px)/1.06 'Unbounded', system-ui, sans-serif; }
     h2 { margin: 0 0 28px; font: 700 clamp(24px, 3vw, 36px)/1.15 'Unbounded', system-ui, sans-serif; }
     h3 { margin: 0 0 8px; font: 700 19px/1.25 'Unbounded', system-ui, sans-serif; }
-    .lead { max-width: 680px; margin: 0; color: var(--muted); font-size: 18px; }
-    .hero { padding-top: 84px; }
-    .facts { display: flex; flex-wrap: wrap; gap: 34px; margin: 36px 0 0; padding: 0; list-style: none; }
-    .facts b { display: block; font: 800 28px/1 'Unbounded', system-ui, sans-serif; }
-    .facts span { color: var(--muted); font-size: 13px; }
+    .hero { padding-top: 84px; padding-bottom: 24px; }
 
-    .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
     .case { display: flex; flex-direction: column; overflow: hidden; border: 1px solid var(--line); border-radius: 22px; background: var(--card); transition: transform .25s, border-color .25s; }
     .case:hover { transform: translateY(-4px); border-color: rgba(255,190,26,.45); }
     .case img { display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; border-bottom: 1px solid var(--line); }
@@ -54,7 +50,7 @@
     .stack li { padding: 9px 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--card); font-weight: 700; font-size: 14px; }
     .note { margin-top: 18px; color: var(--dim); font-size: 13px; }
     footer { padding: 36px 0 56px; color: var(--dim); font-size: 13px; }
-    @media (max-width: 960px) { .services { grid-template-columns: repeat(2, 1fr); } .steps { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 960px) { .grid, .services { grid-template-columns: repeat(2, 1fr); } .steps { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 680px) { .grid, .services, .steps { grid-template-columns: 1fr; } section { padding: 56px 0; } .hero { padding-top: 56px; } }
   </style>
 </head>
@@ -64,12 +60,6 @@
       <div class="wrap">
         <p class="eyebrow">Портфолио</p>
         <h1>Веб-разработчик: сайты, Telegram-боты и&nbsp;автоматизация под&nbsp;ключ</h1>
-        <p class="lead">Мне 20, программирую с 15 лет. Делаю для малого бизнеса сайты, которые приводят заявки, и Telegram-ботов, которые обрабатывают их без участия человека. Ниже — живые проекты: их можно открыть и потрогать.</p>
-        <ul class="facts">
-          <li><b>5 лет</b><span>практики в программировании</span></li>
-          <li><b>2</b><span>живых проекта онлайн</span></li>
-          <li><b>2 недели</b><span>поддержки после сдачи</span></li>
-        </ul>
       </div>
     </section>
 
@@ -96,8 +86,17 @@
               <div class="links"><a href="cosmos/">Открыть →</a></div>
             </div>
           </article>
+          <article class="case">
+            <a href="ozerova/"><img src="img/ozerova.jpg" alt="Сайт психолога «Нина Озерова»" loading="lazy"></a>
+            <div class="body">
+              <div class="tags"><span>Лендинг</span><span>Mini App</span><span>Тёмная тема</span><span>Адаптив</span></div>
+              <h3>Сайт психолога с онлайн-записью</h3>
+              <p>Сайт частного психолога и мини-приложение записи в Telegram. Спокойный дизайн «тёплый кабинет», светлая и тёмная темы, дыхательная пауза и мини-тест, форма заявки, политика обработки данных. Демо-проект: психолог вымышленный.</p>
+              <div class="links"><a href="ozerova/">Сайт →</a><a href="ozerova/app/">Мини-приложение →</a></div>
+            </div>
+          </article>
         </div>
-        <p class="note">Бот работает в демо-режиме: команда /admin показывает, как запись выглядит глазами администратора.</p>
+        <p class="note">Бот автосервиса работает в демо-режиме: команда /admin показывает, как запись выглядит глазами администратора.</p>
       </div>
     </section>
 
