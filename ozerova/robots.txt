@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://volodya22877.github.io/ozerova/sitemap.xml
